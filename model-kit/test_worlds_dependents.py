@@ -9,10 +9,13 @@
   * правила манифеста на мирах книги дают ровно числа шаблона (числа, зависящие от миров, — не литералы тестов, а выход
     правил: запись сменили, а числа нет — красный тест);
   * каждый лист и инструмент дерева, который читает запись миров, надстройку или их копии, назван в манифесте
-    (`readers`): новый читатель миров без строки манифеста — красный тест.
+    (`readers`): новый читатель миров без строки манифеста — красный тест;
+  * движок приёма — побайтово образец источника (`model-kit/adopt_worlds.py`) на коммите приёма: его хэш команда
+    пишет в состояние, копия модели с ним сверяется без сети.
 """
 from __future__ import annotations
 
+import hashlib
 import re
 import subprocess
 import sys
@@ -45,6 +48,16 @@ def test_the_book_stands_on_the_version_of_its_state(manifest, source):
     assert A.check(manifest, source, ROOT) == []
 
 
+def test_the_engine_is_the_family_engine_of_the_state():
+    """Движок приёма один на семейство: копия `ops/tools/adopt_worlds.py` побайтово равна образцу источника
+    (`model-kit/adopt_worlds.py`) на коммите, с которого принята версия миров, — его хэш команда пишет в состояние.
+    Правка движка — только в источнике; модель получает её копией (без сети: сверка с хэшем состояния)."""
+    state = A.read_state(ROOT)
+    assert state.get("engine_sha256"), "в состоянии нет хэша образца движка: версию миров принимала прежняя команда"
+    own = hashlib.sha256((ROOT / "ops" / "tools" / "adopt_worlds.py").read_bytes()).hexdigest()
+    assert own == state["engine_sha256"], "копия движка не равна образцу источника на коммите приёма (правили руками?)"
+
+
 def test_the_template_names_the_record_of_the_state(manifest):
     state = A.read_state(ROOT)
     tpl = yaml.safe_load((ROOT / manifest["template"]).read_text(encoding="utf-8"))
@@ -54,7 +67,7 @@ def test_the_template_names_the_record_of_the_state(manifest):
 
 
 def test_every_reader_of_the_worlds_is_in_the_manifest(manifest):
-    files = subprocess.run(["git", "-C", str(ROOT), "ls-files", "*.py"], capture_output=True, text=True,
+    files = subprocess.run(["git", "ls-files", "*.py"], cwd=ROOT, capture_output=True, text=True,   # чтение рабочей копии
                            encoding="utf-8").stdout.split()
     readers = [f for f in files if not f.startswith("tests/")
                and READS_WORLDS.search((ROOT / f).read_text(encoding="utf-8", errors="ignore"))]
@@ -65,8 +78,9 @@ def test_every_reader_of_the_worlds_is_in_the_manifest(manifest):
 
 
 def test_the_manifest_steps_name_what_exists(manifest):
-    ids = {s["id"] for s in manifest["steps"]}
-    for s in manifest["steps"]:
+    steps = A.walk_steps(manifest["steps"])            # с шагами тел циклов (loop)
+    ids = {s["id"] for s in steps}
+    for s in steps:
         if s["kind"] == "rule":
             mod = A.load_module(ROOT / s["module"], f"guard_{s['id'].replace('-', '_')}")
             assert callable(getattr(mod, s["function"], None)), s["id"]
