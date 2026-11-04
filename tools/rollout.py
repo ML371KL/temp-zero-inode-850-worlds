@@ -31,8 +31,8 @@ REGISTRY = ROOT / "models.yaml"
 REPORT_SCHEMA = "adopt-worlds-report-v1"
 
 
-def load_registry(only: set[str] | None) -> list[dict]:
-    reg = yaml.safe_load(REGISTRY.read_text(encoding="utf-8"))
+def load_registry(only: set[str] | None, path: Path = REGISTRY) -> list[dict]:
+    reg = yaml.safe_load(path.read_text(encoding="utf-8"))
     models = [m for m in reg["models"] if not only or m["id"] in only]
     unknown = (only or set()) - {m["id"] for m in models}
     if unknown:
@@ -145,6 +145,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--jobs", type=int, default=1)
     ap.add_argument("--out")
     ap.add_argument("--collect", action="store_true", help="не запускать, только собрать отчёты из каталога сводки")
+    ap.add_argument("--registry", help="другой реестр (например, ветки перевода до слияния); по умолчанию models.yaml")
     a = ap.parse_args(argv)
     idx = json.loads((ROOT / "versions.json").read_text(encoding="utf-8"))
     if a.version not in idx["versions"]:
@@ -153,7 +154,7 @@ def main(argv: list[str] | None = None) -> int:
     if a.mode == "branch" and idx["versions"][a.version]["status"] != "canon":
         print(f"ОТКАЗ: версия {a.version} — {idx['versions'][a.version]['status']}: её принимают только сухим прогоном")
         return 1
-    models = load_registry(set(a.models.split(",")) if a.models else None)
+    models = load_registry(set(a.models.split(",")) if a.models else None, Path(a.registry) if a.registry else REGISTRY)
     out = Path(a.out) if a.out else ROOT / "rollout" / a.version
     out.mkdir(parents=True, exist_ok=True)
     if a.collect:
