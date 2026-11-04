@@ -1,0 +1,13 @@
+version: 1.7-t1
+status: trial
+title: 'проба: версия 1.7 со снимком мира M на 27.10.2026'
+origin: magnit-850oa book-1.7
+cbr_decision: '2026-10-23'
+built: '2026-11-04'
+labels:
+  walk_step: 'миры ставок (проба: снимок 27.10.2026)'
+  short: '1.7'
+notes_for_models:
+- meta.curve_as_of = дата снимка записи (record.curve_date)
+- уровень кривой в терминале N/H/M — блок curve_lt записи (8,9 / 12,6 / 16,7)
+- блок market_window ядра не читают

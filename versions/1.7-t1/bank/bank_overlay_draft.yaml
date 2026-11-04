@@ -1,0 +1,443 @@
+# Банковская надстройка миров — ЧЕРНОВИК (пересборка миров 1.7, 29.10.2026: база — прогноз ЦБ 23.10.2026).
+# Собрано bank_overlay_build_1_7.py (канон миров 1.7, impl/canon/bank); править входы там, не здесь. Источники и страницы — блок meta.sources и поля table/pdf_page.
+meta:
+  status: 'пересборка миров 1.7, 29.10.2026 (этап 1 канона: база — прогноз ЦБ 23.10.2026, сценарии — итоговая ОНДКП 28.10.2026, запись миров 1.7);
+    в книгу — решением автора книги'
+  units: '% г/г; [низ, верх] — диапазон ЦБ; середина — mid()'
+  worlds_record: {path: worlds_source.json, sha256: 8bea2b38392033d19a2f595e4c418183de9759f4cac93e5772ac015eea0e3ead, asof: '2026-10-27'}
+  sources:
+    ondkp: {file: primary/forecast_261023.pdf, url: 'https://www.cbr.ru/Content/Document/File/198897/forecast_261023.pdf', sha256: 0e007c6d0d654b9ada9beb10ea7a6cec66d3973385fb7795677db095dd8e9cb2,
+      note: 'база надстройки — «Среднесрочный прогноз Банка России по итогам заседания Совета директоров по ключевой ставке 23 октября 2026 года»,
+        с. 1 (сноска ¹: средняя КС 01.01–25.10.2026 = 14,7 %, 26.10–31.12.2026 — 14,0 %); те же числа — табл. 3.2 итоговой ОНДКП 28.10.2026 (PDF-с.
+        73). Ключ блока — ondkp, как читает build_overlay.py'}
+    ondkp_final: {file: primary/ondkp_2027_2029_final.pdf, url: 'https://www.cbr.ru/Content/Document/File/197907/on_2027(2028-2029).pdf', sha256: 7e3b29af616175fd33324aed85d446c4f55e5b7c3c34c938a12610bb65a4a6a9,
+      note: 'итоговая ОНДКП 2027–2029 от 28.10.2026: альтернативные сценарии — табл. 3.3–3.5 (PDF-с. 77 / 81 / 85); проект 30.09.2026 — sha256
+        3c3270ef…'}
+    bank_review: {file: primary/cbr_bs_review_2026q2.pdf, url: 'https://www.cbr.ru/Collection/Collection/File/62347/analytical_review_bs-2026-2.pdf',
+      sha256: ed4826f87f33741defd797d1c53f7da5ebf28c0944264fed9d4d965e268e5f4e}
+    hh_mortgage_weight: {value: 0.5806, asof: '2026-08-01', basis: 'задолженность по кредитам ФЛ-резидентам: ИЖК 21 723 362 / всего 37 413 036
+        млн ₽', source: 'cbr.ru/dataservice pub 20/ds 42 и pub 21/ds 46, measure 22 (РФ); stage1/worlds/cbr_dataservice_hh_loans_2026.json'}
+  conventions: ['Требования банковской системы к экономике — по сноске ³ табл. 3.2 (кредиты, бумаги, участие; без валютной переоценки); «к населению»
+      включает ИЖК.', Ставки и инфляция миров берутся ТОЛЬКО из записи миров (worlds_source.json); ключевая и ИПЦ ОНДКП здесь — справочно и для
+      пересчёта., 'N = базовый сценарий как есть. H, M = реальный рост базы × инфляция мира: g_w = (1+g_base)·(1+π_w)/(1+π_N) − 1; π — средний
+      ИПЦ мира за год (среднее полугодий cpi_yoy_avg); 2026 — одинаково во всех мирах (год почти прожит).', 'Кризисный режим = рисковый сценарий
+      (табл. 3.5) как есть; ставка рискового сценария (КС 19–21 % в 2027) в миры НЕ переносится — гейт «M × кризис» сверяет CoR, рост кредита
+      и нормативы.', 'Номинальный ВВП — прокси: (1 + реальный ВВП)·(1 + средний ИПЦ) − 1 (дефлятора в таблице нет).', 'После 2029 [В]: рост требований
+      линейно от 2029 к номинальному ВВП мира (2,0 % реально × LT-инфляция мира) к 2031, далее постоянно (кредит/ВВП стабилен).', 'Альтернатива
+      для H (не принята): реальный рост проинфляционного сценария (табл. 3.4) вместо базового — ниже в 2027–2028 на 2–3 п.п.', «Прочая розница»
+      2026–2027 — прогноз по балансам из обзора «Банковский сектор. II кв. 2026» (собран на прогнозе 24.07.2026); новее обзора на 29.10.2026 нет.]
+  overlay: {as_of: '2026-10-23', recipe: 'N — середины диапазонов базового сценария Банка России: среднесрочный прогноз 23.10.2026 (forecast_261023.pdf,
+      с. 1, sha256 0e007c6d…; те же числа — табл. 3.2 итоговой ОНДКП 2027–2029 от 28.10.2026, PDF-с. 73), кроме «прочей розницы» 2026–2027 — прогноз
+      ЦБ по балансам («Банковский сектор. II кв. 2026», PDF-с. 20 / печ. 19, sha256 ed4826f8…) и 2028–2029 — [Р] (население − w·ИЖК)/(1 − w),
+      w = 0,5806 (доля ИЖК в задолженности ФЛ на 01.08.2026, dataservice ЦБ). H и M — реальный рост базы при инфляции своего мира: g_W = (1 +
+      g_N)·(1 + π_W)/(1 + π_N) − 1, π — средний ИПЦ мира за год по записи миров семейства 1.7 (worlds_source.json, sha256 8bea2b38…); 2026 — одинаково
+      во всех мирах. credit_growth.corporate — «организации», mortgage — ИЖК, retail_other — «прочая розница»; funds_growth.retail = funds_growth.corporate
+      = М2 (раздельных рядов нет); nominal_gdp_growth — справочно. Середины диапазонов → доли. Годы 2026–2029; после 2029 ядро сводит рост объёмов
+      к g_T мира к volumes.lt_from (MODEL §4.3). Сборщик — data/assumptions/evidence/worlds_bank/build_overlay.py; вход — черновик надстройки
+      (evidence/worlds_bank/inputs/bank_overlay_draft.yaml).'}
+cbr_scenarios:
+  base:
+    table: прогноз ЦБ 23.10.2026 (= табл. 3.2 итоговой ОНДКП 28.10.2026, PDF-с. 73)
+    pdf_page: 1
+    printed_page: 1
+    name: Базовый
+    years:
+      2026:
+        key_avg: &id001 [14.6, 14.6]
+        cpi_dec: &id002 [7.1, 7.6]
+        cpi_avg: &id003 [6.2, 6.3]
+        gdp: &id004 [0.5, 1.0]
+        m2: &id005 [10, 13]
+        claims: &id006 [8, 11]
+        orgs: &id007 [9, 12]
+        households: &id008 [5, 8]
+        mortgage: &id009 [6, 9]
+      2027:
+        key_avg: [12.5, 13.5]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [5.2, 5.7]
+        gdp: [1.0, 2.0]
+        m2: [5, 10]
+        claims: [5, 10]
+        orgs: [6, 11]
+        households: [5, 10]
+        mortgage: [5, 10]
+      2028:
+        key_avg: [9.0, 10.0]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [4.0, 4.0]
+        gdp: [1.5, 2.5]
+        m2: [7, 12]
+        claims: [8, 13]
+        orgs: [8, 13]
+        households: [8, 13]
+        mortgage: [10, 15]
+      2029:
+        key_avg: [7.5, 8.5]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [4.0, 4.0]
+        gdp: [1.5, 2.5]
+        m2: [7, 12]
+        claims: [8, 13]
+        orgs: [8, 13]
+        households: [8, 13]
+        mortgage: [10, 15]
+  disinflation:
+    table: '3.3'
+    pdf_page: 77
+    printed_page: 75
+    name: Дезинфляционный
+    years:
+      2026:
+        key_avg: *id001
+        cpi_dec: *id002
+        cpi_avg: *id003
+        gdp: *id004
+        m2: *id005
+        claims: *id006
+        orgs: *id007
+        households: *id008
+        mortgage: *id009
+      2027:
+        key_avg: [10.0, 12.0]
+        cpi_dec: [3.0, 4.0]
+        cpi_avg: [4.5, 5.5]
+        gdp: [2.0, 3.0]
+        m2: [7, 12]
+        claims: [7, 12]
+        orgs: [7, 12]
+        households: [8, 13]
+        mortgage: [8, 13]
+      2028:
+        key_avg: [7.5, 8.5]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [4.0, 4.0]
+        gdp: [2.0, 3.0]
+        m2: [8, 13]
+        claims: [9, 14]
+        orgs: [9, 14]
+        households: [9, 14]
+        mortgage: [11, 16]
+      2029:
+        key_avg: [7.5, 8.5]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [4.0, 4.0]
+        gdp: [1.5, 2.5]
+        m2: [7, 12]
+        claims: [8, 13]
+        orgs: [8, 13]
+        households: [8, 13]
+        mortgage: [10, 15]
+  proinflation:
+    table: '3.4'
+    pdf_page: 81
+    printed_page: 79
+    name: Проинфляционный
+    years:
+      2026:
+        key_avg: *id001
+        cpi_dec: *id002
+        cpi_avg: *id003
+        gdp: *id004
+        m2: *id005
+        claims: *id006
+        orgs: *id007
+        households: *id008
+        mortgage: *id009
+      2027:
+        key_avg: [14.0, 16.0]
+        cpi_dec: [4.5, 5.5]
+        cpi_avg: [5.2, 6.2]
+        gdp: [0.5, 1.5]
+        m2: [7, 12]
+        claims: [3, 8]
+        orgs: [3, 8]
+        households: [4, 9]
+        mortgage: [4, 9]
+      2028:
+        key_avg: [11.5, 12.5]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [4.0, 4.5]
+        gdp: [0.5, 1.5]
+        m2: [7, 12]
+        claims: [6, 11]
+        orgs: [6, 11]
+        households: [6, 11]
+        mortgage: [8, 13]
+      2029:
+        key_avg: [8.5, 9.5]
+        cpi_dec: [4.0, 4.0]
+        cpi_avg: [4.0, 4.0]
+        gdp: [1.5, 2.5]
+        m2: [7, 12]
+        claims: [6, 11]
+        orgs: [6, 11]
+        households: [6, 11]
+        mortgage: [8, 13]
+  risk:
+    table: '3.5'
+    pdf_page: 85
+    printed_page: 83
+    name: Рисковый
+    years:
+      2026:
+        key_avg: *id001
+        cpi_dec: *id002
+        cpi_avg: *id003
+        gdp: *id004
+        m2: *id005
+        claims: *id006
+        orgs: *id007
+        households: *id008
+        mortgage: *id009
+      2027:
+        key_avg: &id010 [19.0, 21.0]
+        cpi_dec: &id011 [11.0, 13.0]
+        cpi_avg: &id012 [8.1, 9.7]
+        gdp: &id013 [-4.0, -3.0]
+        m2: &id014 [4, 9]
+        claims: &id015 [0, 5]
+        orgs: &id016 [2, 7]
+        households: &id017 [-5, 0]
+        mortgage: &id018 [0, 5]
+      2028:
+        key_avg: &id019 [14.0, 16.0]
+        cpi_dec: &id020 [5.0, 7.0]
+        cpi_avg: &id021 [9.3, 11.4]
+        gdp: &id022 [-2.5, -1.5]
+        m2: &id023 [6, 11]
+        claims: &id024 [2, 7]
+        orgs: &id025 [3, 8]
+        households: &id026 [-1, 4]
+        mortgage: &id027 [2, 7]
+      2029:
+        key_avg: &id028 [9.5, 10.5]
+        cpi_dec: &id029 [4.0, 4.0]
+        cpi_avg: &id030 [3.6, 4.4]
+        gdp: &id031 [2.0, 3.0]
+        m2: &id032 [8, 13]
+        claims: &id033 [9, 14]
+        orgs: &id034 [9, 14]
+        households: &id035 [10, 15]
+        mortgage: &id036 [12, 17]
+cbr_bank_review_2026q2:
+  source: cbr_bs_review_2026q2.pdf, PDF-с. 20 / печ. 19 (текст пунктов 1–4 к графикам)
+  companies:
+    2026: [7, 11]
+    2027: [7, 12]
+  mortgage:
+    2026: [6, 10]
+    2027: [7, 12]
+  other_retail:
+    2026: [4, 8]
+    2027: [3, 8]
+  client_funds:
+    2026: [7, 12]
+    2027: null
+worlds:
+  N:
+    years:
+      2026:
+        repricing_factor: 1.0
+        pi_world_avg: null
+        nominal_gdp_proxy: [6.73, 7.36]
+        m2: [10.0, 13.0]
+        claims_total: [8.0, 11.0]
+        orgs: [9.0, 12.0]
+        households: [5.0, 8.0]
+        mortgage: [6.0, 9.0]
+        other_retail: [4.0, 8.0]
+        other_retail_source: ЦБ, обзор II кв. 2026
+        client_funds: [7.0, 12.0]
+      2027:
+        repricing_factor: 1.0
+        pi_world_avg: 5.7
+        nominal_gdp_proxy: [6.25, 7.81]
+        m2: [5.0, 10.0]
+        claims_total: [5.0, 10.0]
+        orgs: [6.0, 11.0]
+        households: [5.0, 10.0]
+        mortgage: [5.0, 10.0]
+        other_retail: [3.0, 8.0]
+        other_retail_source: ЦБ, обзор II кв. 2026
+        client_funds: null
+      2028:
+        repricing_factor: 1.0
+        pi_world_avg: 4.3
+        nominal_gdp_proxy: [5.56, 6.6]
+        m2: [7.0, 12.0]
+        claims_total: [8.0, 13.0]
+        orgs: [8.0, 13.0]
+        households: [8.0, 13.0]
+        mortgage: [10.0, 15.0]
+        other_retail: [5.23, 10.23]
+        other_retail_source: '[Р] (население − w·ипотека)/(1 − w)'
+        client_funds: null
+      2029:
+        repricing_factor: 1.0
+        pi_world_avg: 4.0
+        nominal_gdp_proxy: [5.56, 6.6]
+        m2: [7.0, 12.0]
+        claims_total: [8.0, 13.0]
+        orgs: [8.0, 13.0]
+        households: [8.0, 13.0]
+        mortgage: [10.0, 15.0]
+        other_retail: [5.23, 10.23]
+        other_retail_source: '[Р] (население − w·ипотека)/(1 − w)'
+        client_funds: null
+    claims_growth_2030_2036_mid: {2030: 8.29, 2031: 6.08, 2032: 6.08, 2033: 6.08, 2034: 6.08, 2035: 6.08, 2036: 6.08}
+    nominal_gdp_lt: 6.08
+    lt_inflation: 4.0
+  H:
+    years:
+      2026:
+        repricing_factor: 1.0
+        pi_world_avg: null
+        nominal_gdp_proxy: [6.73, 7.36]
+        m2: [10.0, 13.0]
+        claims_total: [8.0, 11.0]
+        orgs: [9.0, 12.0]
+        households: [5.0, 8.0]
+        mortgage: [6.0, 9.0]
+        other_retail: [4.0, 8.0]
+        other_retail_source: ЦБ, обзор II кв. 2026
+        client_funds: [7.0, 12.0]
+      2027:
+        repricing_factor: 1.01608
+        pi_world_avg: 7.4
+        nominal_gdp_proxy: [7.96, 9.54]
+        m2: [6.69, 11.77]
+        claims_total: [6.69, 11.77]
+        orgs: [7.7, 12.79]
+        households: [6.69, 11.77]
+        mortgage: [6.69, 11.77]
+        other_retail: [4.66, 9.74]
+        other_retail_source: ЦБ, обзор II кв. 2026
+        client_funds: null
+      2028:
+        repricing_factor: 1.02589
+        pi_world_avg: 7.0
+        nominal_gdp_proxy: [8.29, 9.36]
+        m2: [9.77, 14.9]
+        claims_total: [10.8, 15.93]
+        orgs: [10.8, 15.93]
+        households: [10.8, 15.93]
+        mortgage: [12.85, 17.98]
+        other_retail: [7.95, 13.08]
+        other_retail_source: '[Р] (население − w·ипотека)/(1 − w)'
+        client_funds: null
+      2029:
+        repricing_factor: 1.02452
+        pi_world_avg: 6.55
+        nominal_gdp_proxy: [8.15, 9.21]
+        m2: [9.62, 14.75]
+        claims_total: [10.65, 15.77]
+        orgs: [10.65, 15.77]
+        households: [10.65, 15.77]
+        mortgage: [12.7, 17.82]
+        other_retail: [7.81, 12.93]
+        other_retail_source: '[Р] (население − w·ипотека)/(1 − w)'
+        client_funds: null
+    claims_growth_2030_2036_mid: {2030: 10.41, 2031: 7.61, 2032: 7.61, 2033: 7.61, 2034: 7.61, 2035: 7.61, 2036: 7.61}
+    nominal_gdp_lt: 7.61
+    lt_inflation: 5.5
+  M:
+    years:
+      2026:
+        repricing_factor: 1.0
+        pi_world_avg: null
+        nominal_gdp_proxy: [6.73, 7.36]
+        m2: [10.0, 13.0]
+        claims_total: [8.0, 11.0]
+        orgs: [9.0, 12.0]
+        households: [5.0, 8.0]
+        mortgage: [6.0, 9.0]
+        other_retail: [4.0, 8.0]
+        other_retail_source: ЦБ, обзор II кв. 2026
+        client_funds: [7.0, 12.0]
+      2027:
+        repricing_factor: 1.00047
+        pi_world_avg: 5.75
+        nominal_gdp_proxy: [6.3, 7.86]
+        m2: [5.05, 10.05]
+        claims_total: [5.05, 10.05]
+        orgs: [6.05, 11.05]
+        households: [5.05, 10.05]
+        mortgage: [5.05, 10.05]
+        other_retail: [3.05, 8.05]
+        other_retail_source: ЦБ, обзор II кв. 2026
+        client_funds: null
+      2028:
+        repricing_factor: 1.02924
+        pi_world_avg: 7.35
+        nominal_gdp_proxy: [8.65, 9.72]
+        m2: [10.13, 15.28]
+        claims_total: [11.16, 16.3]
+        orgs: [11.16, 16.3]
+        households: [11.16, 16.3]
+        mortgage: [13.22, 18.36]
+        other_retail: [8.31, 13.45]
+        other_retail_source: '[Р] (население − w·ипотека)/(1 − w)'
+        client_funds: null
+      2029:
+        repricing_factor: 1.05817
+        pi_world_avg: 10.05
+        nominal_gdp_proxy: [11.7, 12.8]
+        m2: [13.22, 18.52]
+        claims_total: [14.28, 19.57]
+        orgs: [14.28, 19.57]
+        households: [14.28, 19.57]
+        mortgage: [16.4, 21.69]
+        other_retail: [11.35, 16.64]
+        other_retail_source: '[Р] (население − w·ипотека)/(1 − w)'
+        client_funds: null
+    claims_growth_2030_2036_mid: {2030: 14.66, 2031: 12.4, 2032: 12.4, 2033: 12.4, 2034: 12.4, 2035: 12.4, 2036: 12.4}
+    nominal_gdp_lt: 12.4
+    lt_inflation: 10.2
+crisis_regime:
+  source: ОНДКП табл. 3.5 (рисковый), PDF-с. 85 / печ. 83
+  years:
+    2026:
+      key_avg: *id001
+      cpi_dec: *id002
+      cpi_avg: *id003
+      gdp: *id004
+      m2: *id005
+      claims: *id006
+      orgs: *id007
+      households: *id008
+      mortgage: *id009
+      other_retail: [3.62, 6.62]
+    2027:
+      key_avg: *id010
+      cpi_dec: *id011
+      cpi_avg: *id012
+      gdp: *id013
+      m2: *id014
+      claims: *id015
+      orgs: *id016
+      households: *id017
+      mortgage: *id018
+      other_retail: [-11.92, -6.92]
+    2028:
+      key_avg: *id019
+      cpi_dec: *id020
+      cpi_avg: *id021
+      gdp: *id022
+      m2: *id023
+      claims: *id024
+      orgs: *id025
+      households: *id026
+      mortgage: *id027
+      other_retail: [-5.15, -0.15]
+    2029:
+      key_avg: *id028
+      cpi_dec: *id029
+      cpi_avg: *id030
+      gdp: *id031
+      m2: *id032
+      claims: *id033
+      orgs: *id034
+      households: *id035
+      mortgage: *id036
+      other_retail: [7.23, 12.23]

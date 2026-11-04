@@ -111,6 +111,62 @@
     "уровень кривой в терминале N/H/M — блок curve_lt записи (8,9 / 12,6 / 16,7)",
     "блок market_window ядра не читают"
    ]
+  },
+  "1.7-t1": {
+   "version": "1.7-t1",
+   "status": "trial",
+   "tag": "worlds-1.7-t1",
+   "origin": "magnit-850oa book-1.7",
+   "title": "проба: версия 1.7 со снимком мира M на 27.10.2026",
+   "cbr_decision": "2026-10-23",
+   "built": "2026-11-04",
+   "record": {
+    "sha256": "8bea2b38392033d19a2f595e4c418183de9759f4cac93e5772ac015eea0e3ead",
+    "csv_sha256": "2fc494bb956610918133acf3c5ed4d042d020435fa5a2af9552871c7e9a6fd3d",
+    "asof": "2026-10-27",
+    "curve_date": "2026-10-27",
+    "curve_lt": {
+     "N": 8.9,
+     "H": 12.6,
+     "M": 16.8
+    },
+    "window_days": [
+     "2026-10-23",
+     "2026-10-26",
+     "2026-10-27"
+    ],
+    "rows": 63
+   },
+   "recipe_sha256": "a68ef018c9a313bfbe9c50803f6c2b3f487a2bb0c9c9f8dcde63978b0b0467d1",
+   "inputs_body_sha256": "f46dac573a2e41f6e112056ba1ea86cd23d5888bad59ab05fd657d4b97fef21a",
+   "files": {
+    "NOTES.md": "973b16427069eac6af82db3a2d7bdf626d7cf83779e7551c02460dfcc5df1315",
+    "VERSION.yaml": "b57e3a798568f539f1e475254a42125dc96c5772a8cacae1db6661d46b7c0278",
+    "bank/bank_overlay_draft.yaml": "6f847dd755bdaea31a653efb0d1dce068e2d221ac0f4683d53beb04d153c53f4",
+    "bank/sector_sheet.yaml": "18af67a65497e37941c98541398247ce12aa467cef74162c7bb3cf39ffb43845",
+    "bank/worlds_bank.json": "0e41c25bf13c372cdccb1134067ac31075116340dc08f09d0177757597a1857b",
+    "doc/WORLDS-RECIPE.md": "232c557078f962fbec9b090e4148b4fb0f704d5eba7cdc2e6c8f0d803f4ddb3d",
+    "inputs/worlds_inputs.yaml": "09463ab5814907854c0383c415e001351877a85f3cff32c188fb89caadf7c2a4",
+    "recipe/worlds_recipe.py": "a68ef018c9a313bfbe9c50803f6c2b3f487a2bb0c9c9f8dcde63978b0b0467d1",
+    "record/worlds_source.csv": "2fc494bb956610918133acf3c5ed4d042d020435fa5a2af9552871c7e9a6fd3d",
+    "record/worlds_source.json": "8bea2b38392033d19a2f595e4c418183de9759f4cac93e5772ac015eea0e3ead"
+   },
+   "overlay": {
+    "sha256": "0e41c25bf13c372cdccb1134067ac31075116340dc08f09d0177757597a1857b",
+    "as_of": "2026-10-23",
+    "recipe": "N — середины диапазонов базового сценария Банка России: среднесрочный прогноз 23.10.2026 (forecast_261023.pdf, с. 1, sha256 0e007c6d…; те же числа — табл. 3.2 итоговой ОНДКП 2027–2029 от 28.10.2026, PDF-с. 73), кроме «прочей розницы» 2026–2027 — прогноз ЦБ по балансам («Банковский сектор. II кв. 2026», PDF-с. 20 / печ. 19, sha256 ed4826f8…) и 2028–2029 — [Р] (население − w·ИЖК)/(1 − w), w = 0,5806 (доля ИЖК в задолженности ФЛ на 01.08.2026, dataservice ЦБ). H и M — реальный рост базы при инфляции своего мира: g_W = (1 + g_N)·(1 + π_W)/(1 + π_N) − 1, π — средний ИПЦ мира за год по записи миров семейства 1.7 (worlds_source.json, sha256 8bea2b38…); 2026 — одинаково во всех мирах. credit_growth.corporate — «организации», mortgage — ИЖК, retail_other — «прочая розница»; funds_growth.retail = funds_growth.corporate = М2 (раздельных рядов нет); nominal_gdp_growth — справочно. Середины диапазонов → доли. Годы 2026–2029; после 2029 ядро сводит рост объёмов к g_T мира к volumes.lt_from (MODEL §4.3). Сборщик — data/assumptions/evidence/worlds_bank/build_overlay.py; вход — черновик надстройки (evidence/worlds_bank/inputs/bank_overlay_draft.yaml).",
+    "source_doc": "primary/forecast_261023.pdf",
+    "source_sha256": "0e007c6d0d654b9ada9beb10ea7a6cec66d3973385fb7795677db095dd8e9cb2"
+   },
+   "labels": {
+    "walk_step": "миры ставок (проба: снимок 27.10.2026)",
+    "short": "1.7"
+   },
+   "notes_for_models": [
+    "meta.curve_as_of = дата снимка записи (record.curve_date)",
+    "уровень кривой в терминале N/H/M — блок curve_lt записи (8,9 / 12,6 / 16,7)",
+    "блок market_window ядра не читают"
+   ]
   }
  }
 }
