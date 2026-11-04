@@ -169,6 +169,35 @@
    "ci_url": null,
    "flags": [],
    "seconds": null
+  },
+  {
+   "model": "vtb",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    53.015,
+    52.556
+   ],
+   "median": [
+    49.925,
+    49.425
+   ],
+   "print": [
+    50.0,
+    49.0
+   ],
+   "d_point": -0.4590000000000032,
+   "d_median": -0.5,
+   "print_steps": 0.5,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [
+    "version: у 1 изменённых ключей в комментарии шаблона есть числа — сверить текст: meta.version",
+    "changes: тесты решений tests/test_ops_rederive.py закреплены на книге 1.0 (BOOK_VERSION — «новая версия — пересмотр»): книга 1.1 требует пересмотра решений ведущим"
+   ],
+   "seconds": null
   }
  ]
 }
