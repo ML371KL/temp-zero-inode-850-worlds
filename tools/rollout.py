@@ -90,6 +90,11 @@ def fmt(x, nd=2):
     return str(x)
 
 
+def prn(x):
+    """Печать витрины: без «.0», с запятой."""
+    return "—" if x is None else f"{x:g}".replace(".", ",")
+
+
 def num(x, nd=2):
     return "—" if x is None else f"{x:.{nd}f}".replace(".", ",")
 
@@ -123,7 +128,7 @@ def render_md(version: str, mode: str, rows: list[dict]) -> str:
         L.append("| {m} | {s} | {p0} → {p1} | {dp} | {m0} → {m1} | {dm} | {pr0} → {pr1} | {gn} / {gg} | {ci} | {fl} |".format(
             m=r["model"], s=r["status"], p0=num(r["point"][0]), p1=num(r["point"][1]), dp=fmt(r["d_point"]),
             m0=num(r["median"][0]), m1=num(r["median"][1]), dm=fmt(r["d_median"]),
-            pr0=r["print"][0] if r["print"][0] is not None else "—", pr1=r["print"][1] if r["print"][1] is not None else "—",
+            pr0=prn(r["print"][0]), pr1=prn(r["print"][1]),
             gn=", ".join(r["gates_new"]) or "—", gg=", ".join(r["gates_gone"]) or "—", ci=r["ci"] or "—",
             fl=len(r["flags"]) or "—"))
     flagged = [r for r in rows if r["flags"]]
@@ -158,7 +163,12 @@ def main(argv: list[str] | None = None) -> int:
     out = Path(a.out) if a.out else ROOT / "rollout" / a.version
     out.mkdir(parents=True, exist_ok=True)
     if a.collect:
-        reports = [dict(read_report(out / f"{m['id']}.json"), model=m["id"]) for m in models]
+        reports = []
+        for m in models:                  # отчёт сводки, иначе — последний отчёт команды в дереве модели
+            f = out / f"{m['id']}.json"
+            if not f.exists():
+                f = model_dir(m) / "var" / "adopt" / a.version / "report.json"
+            reports.append(dict(read_report(f), model=m["id"], _source=str(f)))
     else:
         with cf.ThreadPoolExecutor(max_workers=max(1, a.jobs)) as ex:
             futs = {ex.submit(run_model, m, a.version, a.mode, out): m["id"] for m in models}

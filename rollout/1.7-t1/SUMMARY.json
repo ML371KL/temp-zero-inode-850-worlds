@@ -1,0 +1,174 @@
+{
+ "version": "1.7-t1",
+ "mode": "dry-run",
+ "rows": [
+  {
+   "model": "svcb",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    15.0951,
+    14.9826
+   ],
+   "median": [
+    14.3525,
+    14.245
+   ],
+   "print": [
+    14.4,
+    14.2
+   ],
+   "d_point": -0.11250000000000071,
+   "d_median": -0.10749999999999993,
+   "print_steps": 1.07,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [
+    "class-checks: класс 3 (продление явных лет на год не меняет оценку в пределах допуска): проверка horizon СРАБОТАЛА — находок 1: низ (слой «рыночные ставки как есть»): 6,87 → 6,81 ₽ (−0,06 ₽, −0,87 %) при продлении явных лет на 1 г.; допуск ±0,05 ₽",
+    "gate-texts: гейт m_crisis_vs_cbr: состав не тот, на котором писались слова шаблона ({'longer': (['mid', 'strict'], ['strict'])}) — текст собран правилом, просмотреть ведущему",
+    "gate-texts: гейт nim_path_joint: состав не тот, на котором писались слова шаблона ({'cells': (['N/downturn/schedule', 'N/norm/mid', 'N/norm/schedule', 'N/norm/strict', 'N/soft/mid', 'N/soft/schedule', 'N/soft/strict'], ['N/downturn/schedule', 'N/norm/mid', 'N/norm/schedule', 'N/norm/strict', 'N/soft/mid', 'N/soft/strict'])}) — текст собран правилом, просмотреть ведущему",
+    "gate-texts: гейт pb_by_world: состав не тот, на котором писались слова шаблона ({'regimes': (['crisis'], ['downturn', 'crisis']), 'count': (3, 5)}) — текст собран правилом, просмотреть ведущему"
+   ],
+   "seconds": null
+  },
+  {
+   "model": "t",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    325.739,
+    324.473
+   ],
+   "median": [
+    311.0,
+    309.425
+   ],
+   "print": [
+    310.0,
+    310.0
+   ],
+   "d_point": -1.2659999999999627,
+   "d_median": -1.5749999999999886,
+   "print_steps": 0.31,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [
+    "spreads: у 10 изменённых ключей в комментарии шаблона есть числа — сверить текст: nii.books.sme_loans.spread.2026, nii.books.securities.spread.2026, nii.books.auto.spread.2029, nii.books.auto.spread.2030, nii.books.mortgage.spread.2028, nii.books.mortgage.spread.2029 …",
+    "derived: у 28 изменённых ключей в комментарии шаблона есть числа — сверить текст: nii.phi_split, regimes.near_nim_shift.2027Q3, regimes.near_nim_shift.2027, regimes.near_nim_shift.2028Q1, regimes.near_nim_shift.2028Q2, regimes.near_nim_shift.2028Q3 …",
+    "tables: подпись справочного варианта window_level_in_modal_cell (маржа и C/I модальной клетки варианта) — числа прежней книги: правило без прогона сетки варианта не считается; сверить и при правке — таблицы заново"
+   ],
+   "seconds": null
+  },
+  {
+   "model": "sber",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    355.396,
+    355.451
+   ],
+   "median": [
+    323.85,
+    323.9
+   ],
+   "print": [
+    325.0,
+    325.0
+   ],
+   "d_point": 0.05500000000000682,
+   "d_median": 0.049999999999954525,
+   "print_steps": 0.01,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [
+    "spreads: у 10 изменённых ключей в комментарии шаблона есть числа — сверить текст: nii.books.mortgage.spread.2028, nii.books.mortgage.spread.2029, nii.books.mortgage.spread.2030, nii.books.securities.spread.2028, nii.books.securities.spread.2029, nii.books.securities.spread.2030 …",
+    "changes: тексты объяснений гейтов (gate_explanations.yaml), проза текста книги и решений (DECISIONS) — числа прежней книги; массы гейтов и числа меток — правилом; сверить с таблицами"
+   ],
+   "seconds": null
+  },
+  {
+   "model": "lenta",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    3323.4625824067584,
+    3329.326427649816
+   ],
+   "median": [
+    3173.107571987739,
+    3179.3583800210786
+   ],
+   "print": [
+    3150.0,
+    3200.0
+   ],
+   "d_point": 5.863845243057767,
+   "d_median": 6.250808033339581,
+   "print_steps": 0.13,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [],
+   "seconds": null
+  },
+  {
+   "model": "x5",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    3467.09914540949,
+    3474.493480688069
+   ],
+   "median": [
+    3363.5,
+    3370.6
+   ],
+   "print": [
+    3350.0,
+    3350.0
+   ],
+   "d_point": 7.394335278579092,
+   "d_median": 7.099999999999909,
+   "print_steps": 0.14,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [],
+   "seconds": null
+  },
+  {
+   "model": "magnit",
+   "status": "ok",
+   "exit": null,
+   "point": [
+    1507.4472170148936,
+    1513.962760894075
+   ],
+   "median": [
+    1328.358101173642,
+    1335.2562039362365
+   ],
+   "print": [
+    1350.0,
+    1350.0
+   ],
+   "d_point": 6.51554387918145,
+   "d_median": 6.89810276259459,
+   "print_steps": 0.14,
+   "gates_new": [],
+   "gates_gone": [],
+   "ci": null,
+   "ci_url": null,
+   "flags": [],
+   "seconds": null
+  }
+ ]
+}
