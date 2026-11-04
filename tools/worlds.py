@@ -97,7 +97,8 @@ def entry(vdir: Path) -> dict:
     rec_path = vdir / "record" / "worlds_source.json"
     record = json.loads(rec_path.read_bytes().decode("utf-8"))
     inputs = yaml.safe_load((vdir / "inputs" / "worlds_inputs.yaml").read_text(encoding="utf-8"))
-    files = {p.relative_to(vdir).as_posix(): sha256(p) for p in sorted(vdir.rglob("*")) if p.is_file()}
+    paths = sorted((p for p in vdir.rglob("*") if p.is_file()), key=lambda p: p.relative_to(vdir).as_posix())
+    files = {p.relative_to(vdir).as_posix(): sha256(p) for p in paths}   # порядок — по строке пути: одинаков на любой ОС
     inputs_body = (vdir / "inputs" / "worlds_inputs.yaml").read_bytes().split(b"\n", 1)[1]
     e = {
         "version": vdir.name,
