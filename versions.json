@@ -1,0 +1,116 @@
+{
+ "schema": "850-worlds-index-v1",
+ "latest": "1.7",
+ "versions": {
+  "1.4": {
+   "version": "1.4",
+   "status": "canon",
+   "tag": "worlds-1.4",
+   "origin": "magnit-850oa book-1.6",
+   "title": "миры ставок книги-источника 1.4 (кривая 18.09.2026); надстройка банков — проект ОНДКП 30.09.2026",
+   "cbr_decision": "",
+   "built": "2026-09-24",
+   "record": {
+    "sha256": "7296567d5200b5599efd0989de6ed8c8461d56c5c5dda244ab7d622303969fec",
+    "csv_sha256": "2faae142d447a309daaf43eeea0a928db94ae2dc90ff1e0b21771703cd4a8dfc",
+    "asof": "2026-09-21",
+    "curve_date": "2026-09-18",
+    "curve_lt": null,
+    "window_days": null,
+    "rows": 63
+   },
+   "recipe_sha256": "459b7b6eb8da4228ab8eec657ba9ae758b5521676306555bfd37bc07e4fcf180",
+   "inputs_body_sha256": "7b039c6676b0120b8e0698483db55e4dcfe2ab0cedbf3da823618e479f927f85",
+   "files": {
+    "bank/sector_sheet.yaml": "9ba4a407668c407856db7e3c60bcb9c86f48a62b26b8b2f167e771a7ad56b95e",
+    "bank/worlds_bank.json": "6fb82a41c4aa558c1f9a11323c7602ea0feb82e09d7430e85d4ea696ed03037a",
+    "doc/WORLDS-RECIPE.md": "cf1acf6b2d20dd64c5a9818f9ad554ce67379c8b4fb60d709ff817b97f04df4f",
+    "inputs/worlds_inputs.yaml": "1bb4c426af3196e3e561f54cb145138dce8ea3e3341b3318d9da5aade0ea2f5c",
+    "NOTES.md": "12a59f430351f4b7f4017fd74b2ca32bd7f2ec2e41d727012d5edaa85f0632f7",
+    "recipe/worlds_recipe.py": "459b7b6eb8da4228ab8eec657ba9ae758b5521676306555bfd37bc07e4fcf180",
+    "record/worlds_source.csv": "2faae142d447a309daaf43eeea0a928db94ae2dc90ff1e0b21771703cd4a8dfc",
+    "record/worlds_source.json": "7296567d5200b5599efd0989de6ed8c8461d56c5c5dda244ab7d622303969fec",
+    "VERSION.yaml": "bd180a5f63ff10d991fb7aa0ee52e568297919a6b9010dd28d2dc27a8f399429"
+   },
+   "overlay": {
+    "sha256": "6fb82a41c4aa558c1f9a11323c7602ea0feb82e09d7430e85d4ea696ed03037a",
+    "as_of": "2026-09-30",
+    "recipe": "N — середины диапазонов базового сценария ОНДКП 2027–2029 (табл. 3.2, PDF-с. 73 / печ. 71), кроме «прочей розницы» 2026–2027 — прогноз ЦБ по балансам («Банковский сектор. II кв. 2026», PDF-с. 20 / печ. 19, sha256 ed4826f8…) и 2028–2029 — [Р] (население − w·ИЖК)/(1 − w), w = 0,5806 (доля ИЖК в задолженности ФЛ на 01.08.2026, dataservice ЦБ). H и M — реальный рост базы при инфляции своего мира: g_W = (1 + g_N)·(1 + π_W)/(1 + π_N) − 1, π — средний ИПЦ мира за год по записи миров семейства (worlds_source.json, sha256 7296567d…); 2026 — одинаково во всех мирах. credit_growth.corporate — «организации», mortgage — ИЖК, retail_other — «прочая розница»; funds_growth.retail = funds_growth.corporate = М2 (раздельных рядов нет); nominal_gdp_growth — справочно. Середины диапазонов → доли. Годы 2026–2029; после 2029 ядро сводит рост объёмов к g_T мира к volumes.lt_from (MODEL §4.3). Сборщик — data/assumptions/evidence/worlds_bank/build_overlay.py; вход — черновик надстройки этапа 1 (evidence/worlds_bank/inputs/bank_overlay_draft.yaml).",
+    "source_doc": "primary/cbr_ondkp_2027-2029_draft_as_of_20260930.pdf",
+    "source_sha256": "3c3270efb65537e03f3711c5e8eb97d703f3eeb5ae71484e0e2a99d86a5c69d3"
+   },
+   "labels": {
+    "walk_step": "миры ставок (кривая 18.09.2026)",
+    "short": "1.4"
+   },
+   "notes_for_models": [
+    "запись 1.4 несли книги Магнита 1.4–1.6 и все модели семейства до 03.11.2026"
+   ]
+  },
+  "1.7": {
+   "version": "1.7",
+   "status": "canon",
+   "tag": "worlds-1.7",
+   "origin": "magnit-850oa book-1.7",
+   "title": "миры ставок после решения Банка России 23.10.2026",
+   "cbr_decision": "2026-10-23",
+   "built": "2026-10-29",
+   "record": {
+    "sha256": "1e905cb77c1d3a81cc89d6b80769171a60c0169d103340d3e7314bd8030d6f00",
+    "csv_sha256": "5fc8e86b97b9647e54dc7ef61cd34043aae6a4b8f5b492048abe6dd8957e87b0",
+    "asof": "2026-10-28",
+    "curve_date": "2026-10-28",
+    "curve_lt": {
+     "N": 8.9,
+     "H": 12.6,
+     "M": 16.7
+    },
+    "window_days": [
+     "2026-10-23",
+     "2026-10-26",
+     "2026-10-27",
+     "2026-10-28"
+    ],
+    "rows": 63
+   },
+   "recipe_sha256": "3b786f7b39356a9592fce4f460e45f4a65ae397b730aa1702af3680cca3b56a4",
+   "inputs_body_sha256": "d323e4da20bc99d6e30aee46fae90350a24d7470691155baedba5be60947ced1",
+   "files": {
+    "bank/bank_overlay_build_1_7.py": "56832559271964f1b7b4adf6e3063891012a2f402b35f21167d4537e8ddf6eff",
+    "bank/bank_overlay_draft.yaml": "8e28fe0b161f11071cb14a2c2bf4c240d15f67744084cccbe667fdc29bb7485a",
+    "bank/sector_sheet.yaml": "1ca7d4e1edcd1561c0bb4c992829e2f4ae5b9eb92e21b8382f6fc49f9107ad13",
+    "bank/worlds_bank.json": "8611f015aeb6206f4e0c5a6471e2db310c471d11c29953f388edd9b56d39c54d",
+    "doc/WORLDS-RECIPE.md": "232c557078f962fbec9b090e4148b4fb0f704d5eba7cdc2e6c8f0d803f4ddb3d",
+    "evidence/facts.py": "462c8f355c2b01f0b2fe0c5651354fade54f311775aaf513d6eacb108410881a",
+    "evidence/facts_out.txt": "5e86fe8c77617b3ef4350d40f34f824e8747386aa639479bbdc7109f7ba98105",
+    "evidence/fetch_market.py": "6899bea1ce8f2beedace4a44810c81ec58bc99c5d43266ca7a31189c4cf91728",
+    "evidence/SOURCES.json": "8336c09c4d8b5a77443d001d48f823e3e6a31ffb6b331bdbac04ce83e526eacf",
+    "evidence/window.py": "794893418bb408794ff54580afcb74c94a6643651f75bce16f1ef994408e52ec",
+    "evidence/window_block.json": "66ebdf34fc9ef8c66f1d3616faf26947bedaaa2561ddde6f4f910702cadefb3b",
+    "evidence/window_out.txt": "6d30b5f16e1c046ecb060e538b0f7dad5cdcdc9c9ac51b78ddec7d8c873436e7",
+    "inputs/worlds_inputs.yaml": "70655271fd8356748cce1e4e83580ebd36aa998c0ca5842a731f50d267f9dbb8",
+    "NOTES.md": "ffffd73580861f60d04027dd0640f7ad34b67bf0ff49980ed65bd12ec2c3685e",
+    "recipe/worlds_recipe.py": "3b786f7b39356a9592fce4f460e45f4a65ae397b730aa1702af3680cca3b56a4",
+    "record/worlds_source.csv": "5fc8e86b97b9647e54dc7ef61cd34043aae6a4b8f5b492048abe6dd8957e87b0",
+    "record/worlds_source.json": "1e905cb77c1d3a81cc89d6b80769171a60c0169d103340d3e7314bd8030d6f00",
+    "VERSION.yaml": "10781f6b5fcb2841f6b1c66dd4fe4584a52fcd470c17653bc9c2e9bfb78ddc3c"
+   },
+   "overlay": {
+    "sha256": "8611f015aeb6206f4e0c5a6471e2db310c471d11c29953f388edd9b56d39c54d",
+    "as_of": "2026-10-23",
+    "recipe": "N — середины диапазонов базового сценария Банка России: среднесрочный прогноз 23.10.2026 (forecast_261023.pdf, с. 1, sha256 0e007c6d…; те же числа — табл. 3.2 итоговой ОНДКП 2027–2029 от 28.10.2026, PDF-с. 73), кроме «прочей розницы» 2026–2027 — прогноз ЦБ по балансам («Банковский сектор. II кв. 2026», PDF-с. 20 / печ. 19, sha256 ed4826f8…) и 2028–2029 — [Р] (население − w·ИЖК)/(1 − w), w = 0,5806 (доля ИЖК в задолженности ФЛ на 01.08.2026, dataservice ЦБ). H и M — реальный рост базы при инфляции своего мира: g_W = (1 + g_N)·(1 + π_W)/(1 + π_N) − 1, π — средний ИПЦ мира за год по записи миров семейства 1.7 (worlds_source.json, sha256 1e905cb7…); 2026 — одинаково во всех мирах. credit_growth.corporate — «организации», mortgage — ИЖК, retail_other — «прочая розница»; funds_growth.retail = funds_growth.corporate = М2 (раздельных рядов нет); nominal_gdp_growth — справочно. Середины диапазонов → доли. Годы 2026–2029; после 2029 ядро сводит рост объёмов к g_T мира к volumes.lt_from (MODEL §4.3). Сборщик — data/assumptions/evidence/worlds_bank/build_overlay.py; вход — черновик надстройки (evidence/worlds_bank/inputs/bank_overlay_draft.yaml).",
+    "source_doc": "primary/forecast_261023.pdf",
+    "source_sha256": "0e007c6d0d654b9ada9beb10ea7a6cec66d3973385fb7795677db095dd8e9cb2"
+   },
+   "labels": {
+    "walk_step": "миры ставок (ЦБ 23.10.2026)",
+    "short": "1.7"
+   },
+   "notes_for_models": [
+    "meta.curve_as_of = дата снимка записи (record.curve_date)",
+    "уровень кривой в терминале N/H/M — блок curve_lt записи (8,9 / 12,6 / 16,7)",
+    "блок market_window ядра не читают"
+   ]
+  }
+ }
+}

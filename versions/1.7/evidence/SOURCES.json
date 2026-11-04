@@ -1,0 +1,115 @@
+{
+ "note": "Первичные данные листа окна и фактов версии 1.7. Сами файлы в публичный репозиторий не кладутся (правило семейства: первичка — хэшами и выписками чисел); они лежат в приватной папке `850-worlds-evidence/1.7/data` рядом с репозиторием и в листе книги-источника (`data/assumptions/evidence/book-1.7/worlds/data`). Числа, которые из них взяты, — во входах записи (`inputs/worlds_inputs.yaml`: окно по дням, факты полугодия) и в `window_block.json`, `window_out.txt`, `facts_out.txt`.",
+ "files": {
+  "cbr_cpd_2026-09.html": {
+   "sha256": "eee3e760e716676578954723dd94229edd874ab5409611e5474c656f9d78d2e4",
+   "bytes": 88127,
+   "source": "cbr.ru: «Динамика потребительских цен», сентябрь 2026"
+  },
+  "cbr_forecast_2026-10-23.txt": {
+   "sha256": "10b290e1949a3402f8a8c4950e5d05c2c2be85ba9afbe382e05cd6c37060190b",
+   "bytes": 7130,
+   "source": "https://www.cbr.ru/Content/Document/File/198897/forecast_261023.pdf (выдержка текстом)"
+  },
+  "cbr_infl_2025-01_2026-10.html": {
+   "sha256": "2a84429cb2fefc520b12e944502ea63f9e7f508925a961bfe13fbb9dc5bda1cc",
+   "bytes": 49715,
+   "source": "cbr.ru/hd_base/infl: инфляция и ключевая ставка, 01.2025–10.2026"
+  },
+  "cbr_keyrate_2026-06-01_2026-10-28.html": {
+   "sha256": "c78fbd6bccf8abfe1263ce3791b3429d58442ce64d1f36ed7aedc85fa8c39fa7",
+   "bytes": 43184,
+   "source": "cbr.ru/hd_base/KeyRate: ключевая ставка 01.06–28.10.2026"
+  },
+  "ofzin_history_SU52002RMFS1.json": {
+   "sha256": "0124cafe4932ab86e60010341ce58c3288d01d9c82cdde8083f6d4ad4ae26b1c",
+   "bytes": 14981,
+   "source": "https://iss.moex.com/iss/history/engines/stock/markets/bonds/boards/TQOB/securities/SU52002RMFS1.json"
+  },
+  "ofzin_history_SU52003RMFS9.json": {
+   "sha256": "e384111abf0c5688dcc374c518a903d43ec4574460ab22d634ca1ed97366a27c",
+   "bytes": 14974,
+   "source": "https://iss.moex.com/iss/history/engines/stock/markets/bonds/boards/TQOB/securities/SU52003RMFS9.json"
+  },
+  "ofzin_history_SU52004RMFS7.json": {
+   "sha256": "c21559a7d02ae0bdcfd47c5f769e66e1c9b094df18dd2eda6206199cca5dc047",
+   "bytes": 14929,
+   "source": "https://iss.moex.com/iss/history/engines/stock/markets/bonds/boards/TQOB/securities/SU52004RMFS7.json"
+  },
+  "ofzin_history_SU52005RMFS4.json": {
+   "sha256": "37d882b7c4a2c17779ffdb5940ee58c7072f8c85f84a1ae54fe1b83c1a8fed83",
+   "bytes": 15004,
+   "source": "https://iss.moex.com/iss/history/engines/stock/markets/bonds/boards/TQOB/securities/SU52005RMFS4.json"
+  },
+  "ondkp_draft_2026-09-30_excerpt.txt": {
+   "sha256": "40db7ceef68d83c31f77618ea54215e38e244f4c08723ec02e20c96ae3ac573b",
+   "bytes": 27718,
+   "source": "проект ОНДКП 2027–2029 от 30.09.2026, cbr.ru (выдержка)"
+  },
+  "ondkp_final_2026-10-28_excerpt.txt": {
+   "sha256": "0ad96f38801153fbcaae97f98f12562b39f70b6b5b8e4045444b46281f65212b",
+   "bytes": 36057,
+   "source": "https://www.cbr.ru/Content/Document/File/197907/on_2027(2028-2029).pdf (выдержка)"
+  },
+  "rosstat_tab1-zpl_08-2026.xlsx": {
+   "sha256": "27e2d33eae4439b89805a08b45e7bd465b8ca45257fc09575a52e07c9504fd33",
+   "bytes": 20843,
+   "source": "rosstat.gov.ru: среднемесячная начисленная заработная плата, таб. 1, август 2026"
+  },
+  "survey_2026-10-14_p1-3.txt": {
+   "sha256": "117f61b25fdbe8b78719ea4c603d8a8913ad4ca2b43aadb746a04bb040e02855",
+   "bytes": 13953,
+   "source": "макроэкономический опрос Банка России, октябрь 2026, с. 1–3, cbr.ru (выдержка)"
+  },
+  "zcyc_2026-10-15.json": {
+   "sha256": "4e9da84e7424f190d5f87ee7d8de302d3e52a332d95e67dcd43c99fb6d85b99c",
+   "bytes": 1618,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-15"
+  },
+  "zcyc_2026-10-16.json": {
+   "sha256": "5848421950ba26e3f899c2c9a10a460a0f0353554c31d2497fc79d1e56282559",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-16"
+  },
+  "zcyc_2026-10-19.json": {
+   "sha256": "64f1da4732303a15664210e1c469dfd246de37e1a684771933517ef5d5213e69",
+   "bytes": 1619,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-19"
+  },
+  "zcyc_2026-10-20.json": {
+   "sha256": "7409092f4146261309f83f080bf5ab70ecaea6df2eb6260f9df4ff61091968a5",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-20"
+  },
+  "zcyc_2026-10-21.json": {
+   "sha256": "49845e1eda686c77ea123b76da14c49231d4786285ff42662835e85120dda294",
+   "bytes": 1618,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-21"
+  },
+  "zcyc_2026-10-22.json": {
+   "sha256": "586c3a58db9d7c8c45a6e83877a8e7bd0c8c9d0b6c6c8f589031ed12edc1a129",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-22"
+  },
+  "zcyc_2026-10-23.json": {
+   "sha256": "d92ba137370e82ac7876629f66b6da08a3a559e018c310f18b62b80c27cf2624",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-23"
+  },
+  "zcyc_2026-10-26.json": {
+   "sha256": "ff2dac92cf4667698c71cfb26922ccf10a147164873a5151986700245360801c",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-26"
+  },
+  "zcyc_2026-10-27.json": {
+   "sha256": "af80a38fdbe2f230162f0595d7863169c152be7afe744a6b78472109be254dfe",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-27"
+  },
+  "zcyc_2026-10-28.json": {
+   "sha256": "4d940dc6c880e80fcb235a17ba8f8957142f02c89d32999ec1e6223fa46b96b7",
+   "bytes": 1617,
+   "source": "https://iss.moex.com/iss/engines/stock/zcyc.json?date=2026-10-28"
+  }
+ }
+}

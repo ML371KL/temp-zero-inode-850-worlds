@@ -1,0 +1,9 @@
+*.py text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+# Файлы версий — байты, хэши которых стоят в индексе и у моделей: git их не трогает (запись — CRLF, остальное — LF).
+# Строка последняя: в .gitattributes побеждает последнее подходящее правило.
+versions/** -text
+# Фикстуры — байты записей (CRLF), как в источнике
+tests/fixtures/** -text

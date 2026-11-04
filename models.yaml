@@ -1,0 +1,40 @@
+# Реестр моделей для запуска приёма миров (tools/rollout.py). Пути — от корня папки семейства (переменная
+# FAMILY_ROOT, по умолчанию — каталог над этим репозиторием); venv — от каталога модели.
+# Порядок — порядок выкладки; ВТБ — после переноса на 3К26 (сеанс модели).
+models:
+  - id: svcb
+    name: Совкомбанк
+    kind: bank
+    path: Banks/Sovcombank/svcb-850-release
+    venv: ../svcb-850/.venv
+    env: {BANK_WORKERS: 2}
+  - id: t
+    name: Т-Технологии
+    kind: bank
+    path: Banks/T-Technologies/t-850
+    venv: .venv
+    env: {BANK_WORKERS: 2}
+  - id: sber
+    name: Сбербанк
+    kind: bank
+    path: Banks/Sberbank/sber-850
+    venv: .venv
+    env: {BANK_WORKERS: 2}
+  - id: magnit
+    name: Магнит
+    kind: retail
+    path: magnit-850oa
+    venv: .venv
+    env: {MAGNIT_WORKERS: 2}
+  - id: lenta
+    name: Лента
+    kind: retail
+    path: lenta-850
+    venv: .venv
+    env: {LENTA_WORKERS: 2}
+  - id: x5
+    name: X5
+    kind: projection
+    path: x5-850
+    venv: .venv
+    env: {X5_WORKERS: 2}

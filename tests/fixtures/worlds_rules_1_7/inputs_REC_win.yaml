@@ -1,0 +1,459 @@
+version: кандидат REC (анализ 27.10.2026)
+asof: '2026-10-26'
+units: '% p.a.; period averages unless *_eop'
+grid:
+  first_period: 2026H2
+  n_periods: 21
+curve:
+  source: MOEX ISS zcyc, среднее 16–26.10.2026 (7 торговых дней)
+  date: '2026-10-26'
+  nodes:
+    '0.25': 12.7278
+    '0.5': 13.1886
+    '0.75': 13.5949
+    '1': 13.9563
+    '2': 15.0295
+    '3': 15.6662
+    '5': 16.2508
+    '7': 16.4457
+    '10': 16.526
+    '15': 16.5421
+    '20': 16.5375
+ofz_in:
+  source: MOEX ISS tqob.json 18.09.2026 (evidence/agent-macro/forwards.py)
+  date: '2026-10-26'
+  settlement_date: '2026-10-27'
+  coupon_pct: 2.5
+  coupon_period_days: 182
+  bonds:
+  - secid: '52002'
+    maturity: '2028-02-02'
+    real_yield: 8.7757
+  - secid: '52003'
+    maturity: '2030-07-17'
+    real_yield: 6.7
+  - secid: '52004'
+    maturity: '2032-03-17'
+    real_yield: 6.3986
+  - secid: '52005'
+    maturity: '2033-05-11'
+    real_yield: 6.2043
+  breakeven_cbr_adjusted:
+    '2028': 5.8
+    '2030': 7.7
+    '2032': 9.3
+  breakeven_naive_forwards:
+  - 9.8
+  - 10.1
+m_inflation:
+  source: forward_bei
+  index_lag_months: 3
+  smoothing: centered3
+  real_interpolation: linear_zero
+  real_extrapolation: flat
+  lt_window_periods: 6
+  first_market_period: 2027H1
+  liquidity_adj_pp: 0.0
+  basis_forward_bei: форварды кривой ОФЗ 18.09.2026; инфляция — рыночные форвардные
+    BEI той же даты (номинальные форварды zcyc против реальных форвардов ОФЗ-ИН 52002–52005,
+    лаг индексации 3 мес., сглаживание трёх полугодий); ключевая = 6-мес форвард +
+    0,75 п.п. (0,5 в долгую), сглажено
+  note_forward_bei: 'cpi for M = market forward breakevens of 18.09.2026: MOEX zcyc
+    nominal forwards vs OFZ-IN real forwards (52002-52005 bootstrapped with coupons),
+    3-month index lag, centered 3-half smoothing; long-run = mean 6m forward BEI over
+    the last six grid periods = {pi_ss}% (liquidity adjustment {adj} pp)'
+current_key_rate: 14.0
+cbr_forecast:
+  source: cbr.ru, среднесрочный прогноз по итогам заседания 23.10.2026 (forecast_261023.pdf)
+  date: '2026-10-23'
+  next_core_meeting: 2027-02
+  key_avg:
+    '2026': 14.6
+    '2027':
+    - 12.5
+    - 13.5
+    '2028':
+    - 9.0
+    - 10.0
+    '2029':
+    - 7.5
+    - 8.5
+  rest_of_year:
+    from: '2026-10-26'
+    range:
+    - 14.0
+    - 14.0
+  ytd_avg:
+    to: '2026-10-25'
+    value: 14.7
+  cpi_eop:
+    '2026':
+    - 7.1
+    - 7.6
+    '2027': 4.0
+    '2028': 4.0
+    '2029': 4.0
+  cpi_avg:
+    '2026':
+    - 6.2
+    - 6.3
+    '2027':
+    - 5.2
+    - 5.7
+    '2028': 4.0
+    '2029': 4.0
+  neutral_real_rate:
+    range:
+    - 3.5
+    - 4.5
+ondkp:
+  source: cbr.ru, ОНДКП 2027–2029, проект от 30.09.2026 (табл. 3.3–3.5), sha256 3c3270ef…
+  date: '2026-09-30'
+  proinflation:
+    key_avg:
+      '2027':
+      - 13.0
+      - 15.0
+      '2028':
+      - 11.0
+      - 12.0
+      '2029':
+      - 8.5
+      - 9.5
+    cpi_eop:
+      '2027':
+      - 4.5
+      - 5.5
+      '2028': 4.0
+      '2029': 4.0
+  risk:
+    key_avg:
+      '2027':
+      - 19.0
+      - 21.0
+      '2028':
+      - 14.0
+      - 16.0
+      '2029':
+      - 9.5
+      - 10.5
+    cpi_eop:
+      '2027':
+      - 11.0
+      - 13.0
+      '2028':
+      - 5.0
+      - 7.0
+      '2029': 4.0
+  disinflation:
+    key_avg:
+      '2027':
+      - 9.0
+      - 11.0
+      '2028':
+      - 7.0
+      - 8.0
+      '2029':
+      - 7.5
+      - 8.5
+survey:
+  source: cbr.ru, макроопрос октябрь 2026 (9–13.10, опубликован 14.10.2026), медианы
+    32 экономистов
+  date: '2026-10-14'
+  key_avg:
+    '2026': 14.6
+    '2027': 12.8
+    '2028': 10.8
+    '2029': 9.2
+  cpi_eop:
+    '2026': 7.1
+    '2027': 5.0
+    '2028': 4.2
+    '2029': 4.0
+  cpi_avg:
+    '2026': 6.2
+    '2027': 5.8
+    '2028': 4.5
+    '2029': 4.0
+  weight_in_N: 0.667
+  neutral: 8.5
+minek:
+  source: макропрогноз Минэка (апрель/сентябрь), вторичные источники
+  tariff:
+    2026H2: 0.099
+    '2027': 0.11
+    '2028': 0.08
+    '2029': 0.06
+  tariff_lt_over_cpi: 0.015
+  tariff_lt_from: 2031
+parameters:
+  spread_short_vs_key_pp: -0.5
+  tp_shape:
+    '1': 0.15
+    '3': 0.67
+    '5': 0.87
+    '10': 1.0
+  first_period_blend_observed: 0.5
+  m_key_offset_pp:
+    start: 0.75
+    steady: 0.5
+  round_decimals: 2
+anchor_rules:
+  key_round_pp: 0.25
+  cpi_round_pp: 0.1
+  h_shift_pp: 1.25
+  h_shift_from_year_offset: 1
+  converge_year: 2031
+  m_cpi_converge_halves: 8
+  food_spread_lt_pp:
+    N: 0.3
+    H: 0.5
+    M: 0.5
+  real_wage_lt_pct:
+    N: 2.2
+    H: 1.9
+    M: 1.4
+worlds:
+  N:
+    name: Нормализация
+    basis: среднее между базовым сценарием ЦБ (24.07.2026) и макроопросом аналитиков
+      (01.09.2026), ближе к опросу
+    anchors:
+      key:
+        2027H1: 13.25
+        2027H2: 12.5
+        2028H1: 11.0
+        2028H2: 9.75
+        2029H1: 9.0
+        2029H2: 8.5
+        2030H1: 8.5
+        2030H2: 8.25
+        2031H1: 8.0
+        2031H2: 8.0
+        2026H2: 14.05
+      cpi_eop:
+        2026H2: 7.2
+        2027H1: 5.9
+        2027H2: 4.7
+        2028H1: 4.4
+        2028H2: 4.1
+        2029H1: 4.1
+        2029H2: 4.0
+      cpi_avg:
+        2027H1: 5.9
+        2027H2: 5.5
+        2028H1: 4.5
+        2028H2: 4.1
+        2029H1: 4.0
+        2029H2: 4.0
+        2030H1: 4.0
+        2030H2: 4.0
+        2031H1: 4.0
+        2031H2: 4.0
+        2026H2: 6.7
+      food_avg:
+        2027H1: 6.2
+        2027H2: 5.8
+        2028H1: 4.8
+        2028H2: 4.4
+        2029H1: 4.3
+        2029H2: 4.3
+        2030H1: 4.3
+        2030H2: 4.3
+        2031H1: 4.3
+        2031H2: 4.3
+        2026H2: 7.0
+      wage:
+        2027H1: 8.2
+        2027H2: 7.8
+        2028H1: 6.8
+        2028H2: 6.4
+        2029H1: 6.3
+        2029H2: 6.3
+        2030H1: 6.3
+        2030H2: 6.3
+        2031H1: 6.3
+        2031H2: 6.3
+        2026H2: 9.0
+    steady:
+      key: 8.0
+      cpi_eop: 4.0
+      cpi_avg: 4.0
+      food_avg: 4.3
+      wage: 6.3
+    tp10_ss_pp: 1.4
+    tp_halflife_years: 1.25
+    pi_ss: 4.0
+    curve_lt: 9.0
+  H:
+    name: Высокие ставки надолго
+    basis: проинфляционный сценарий ОНДКП 31.08.2026, сдвинутый вверх на типичную
+      ошибку прогнозов с 2028; инфляция застревает на 5,5 %
+    anchors:
+      key:
+        2027H1: 14.25
+        2027H2: 13.75
+        2028H1: 13.0
+        2028H2: 12.5
+        2029H1: 12.25
+        2029H2: 11.75
+        2030H1: 11.5
+        2030H2: 11.0
+        2031H1: 10.5
+        2031H2: 10.5
+        2026H2: 14.05
+      cpi_eop:
+        2026H2: 7.6
+        2027H1: 7.4
+        2027H2: 7.2
+        2028H1: 7.0
+        2028H2: 6.8
+        2029H1: 6.6
+        2029H2: 6.3
+        2030H1: 6.1
+        2030H2: 5.9
+        2031H1: 5.7
+        2031H2: 5.5
+      cpi_avg:
+        2027H1: 7.4
+        2027H2: 7.0
+        2028H1: 6.0
+        2028H2: 5.6
+        2029H1: 5.5
+        2029H2: 5.5
+        2030H1: 5.5
+        2030H2: 5.5
+        2031H1: 5.5
+        2031H2: 5.5
+        2026H2: 6.8
+      food_avg:
+        2027H1: 7.9
+        2027H2: 7.5
+        2028H1: 6.5
+        2028H2: 6.1
+        2029H1: 6.0
+        2029H2: 6.0
+        2030H1: 6.0
+        2030H2: 6.0
+        2031H1: 6.0
+        2031H2: 6.0
+        2026H2: 7.3
+      wage:
+        2027H1: 9.4
+        2027H2: 9.0
+        2028H1: 8.0
+        2028H2: 7.6
+        2029H1: 7.5
+        2029H2: 7.5
+        2030H1: 7.5
+        2030H2: 7.5
+        2031H1: 7.5
+        2031H2: 7.5
+        2026H2: 8.8
+    steady:
+      key: 10.5
+      cpi_eop: 5.5
+      cpi_avg: 5.5
+      food_avg: 6.0
+      wage: 7.5
+    tp10_ss_pp: 2.5
+    tp_halflife_years: 2.0
+    pi_ss: 5.5
+    curve_lt: 12.7
+  M:
+    name: Рыночный как есть
+    basis: форварды кривой ОФЗ 18.09.2026 и вменённая инфляция ОФЗ-ИН, сглаженная
+      к 9,0 %; ключевая = 6-мес форвард + 0,75 п.п. (0,5 в долгую), сглажено
+    anchors:
+      key:
+        2026H2: 14.0
+        2027H1: 15.2
+        2027H2: 16.4
+        2028H1: 17.0
+        2028H2: 17.5
+        2029H1: 17.5
+        2029H2: 17.6
+        2030H1: 17.6
+        2030H2: 17.8
+        2031H1: 17.7
+        2031H2: 17.6
+      cpi_eop:
+        2026H2: 7.4
+        2027H1: 6.0
+        2027H2: 5.8
+        2028H1: 6.5
+        2028H2: 7.3
+        2029H1: 8.0
+        2029H2: 8.5
+        2030H1: 8.8
+        2030H2: 9.0
+      cpi_avg:
+        2026H2: 6.7
+        2027H1: 6.2
+        2027H2: 5.9
+        2028H1: 6.2
+        2028H2: 6.9
+        2029H1: 7.7
+        2029H2: 8.3
+        2030H1: 8.7
+        2030H2: 8.9
+      food_avg:
+        2026H2: 5.2
+        2027H1: 6.5
+        2027H2: 6.3
+        2028H1: 6.7
+        2028H2: 7.4
+        2029H1: 8.2
+        2029H2: 8.8
+        2030H1: 9.2
+        2030H2: 9.4
+      wage:
+        2026H2: 9.0
+        2027H1: 8.2
+        2027H2: 7.8
+        2028H1: 8.0
+        2028H2: 8.8
+        2029H1: 9.5
+        2029H2: 10.0
+        2030H1: 10.3
+        2030H2: 10.5
+    steady:
+      key: 17.2
+      cpi_eop: 9.0
+      cpi_avg: 9.0
+      food_avg: 9.5
+      wage: 10.5
+    pi_ss: 9.0
+    curve_lt: 16.7
+probabilities:
+  N: 0.35
+  H: 0.45
+  M: 0.2
+probability_ranges:
+  N:
+  - 0.25
+  - 0.4
+  H:
+  - 0.4
+  - 0.5
+  M:
+  - 0.15
+  - 0.25
+notes:
+- key_avg = average key rate in period
+- 'ofz_* for N/H = perfect-foresight mean of (key-0.5pp) over tenor + term premium
+  decaying from today-implied to steady state (N: 1.4pp, half-life 1.25y; H: 2.5pp,
+  half-life 2y); 2026H2 blended 50/50 with observed curve of 18.09.2026'
+- ofz_* for M = forward zero yields from MOEX zcyc 18.09.2026 as is; key for M = 6m
+  forward OFZ + 0.75pp (0.5pp in steady state)
+- cpi for M = OFZ-IN breakevens (CBR-adjusted estimates 5.8/7.7/9.3 and naive 18.09.2026
+  forwards 9.8-10.1) smoothed to 9.0
+notes_record:
+- Якоря записи 1.3.1 заданы суждением по источникам из basis; правила яруса 2 формализованы
+  23.09.2026 и применяются впервые в 1.4a — инструмент печатает кандидатов рядом с
+  якорями записи.
+- curve_lt N/H в записи на 0,1 п.п. выше правила «ОФЗ 10 лет последнего периода»;
+  разрешить в 1.4a.
+current_half_actual:
+  to: '2026-10-26'
+  avg: 14.0551
