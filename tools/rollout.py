@@ -10,7 +10,8 @@
 `dry-run` — во временной копии дерева, в рабочую копию ничего не пишется; `branch` — ветка `worlds-<V>` в рабочей
 копии модели, push ветки и CI, без выкладки). Команды идут по очереди (`--jobs`, по умолчанию 1: тяжёлые прогоны на
 общей машине — по одному). Отчёт каждой модели — JSON по схеме `adopt-worlds-report-v1` (её пишет команда модели);
-сводка — `rollout/<V>/SUMMARY.md` и `SUMMARY.json`: модель × сдвиг точки и медианы, печать, гейты, CI, красные флаги.
+сводка — `rollout/<V>/SUMMARY.md` и `SUMMARY.json`: модель × сдвиг точки и медианы, печать, полоса 80 %, гейты, CI,
+красные флаги. Числа — блок `numbers` отчёта команды: полный шаг таблиц книги (2 000 прогонов) до и после приёма.
 Выкладка — не здесь: одно «да» владельца по сводке, затем модели по очереди по своим справочникам.
 """
 from __future__ import annotations
@@ -99,6 +100,15 @@ def num(x, nd=2):
     return "—" if x is None else f"{x:.{nd}f}".replace(".", ",")
 
 
+def band(n: dict):
+    """Полоса 80 % таблиц: печать витрины (`printed_band`), иначе числа полосы (`band`)."""
+    if n.get("printed_band"):
+        return f"{prn(n['printed_band'][0])}–{prn(n['printed_band'][1])}"
+    if n.get("band"):
+        return f"{num(n['band'][0], 1)}–{num(n['band'][1], 1)}"
+    return "—"
+
+
 def summary_rows(reports: list[dict]) -> list[dict]:
     rows = []
     for r in reports:
@@ -109,7 +119,7 @@ def summary_rows(reports: list[dict]) -> list[dict]:
         rows.append({
             "model": r.get("model"), "status": r.get("status"), "exit": r.get("_exit"),
             "point": [b.get("point"), a.get("point")], "median": [b.get("median"), a.get("median")],
-            "print": [b.get("print"), a.get("print")],
+            "print": [b.get("print"), a.get("print")], "band": [band(b), band(a)],
             "d_point": None if None in (b.get("point"), a.get("point")) else a["point"] - b["point"],
             "d_median": None if None in (b.get("median"), a.get("median")) else a["median"] - b["median"],
             "print_steps": n.get("print_steps"),
@@ -122,13 +132,15 @@ def summary_rows(reports: list[dict]) -> list[dict]:
 
 def render_md(version: str, mode: str, rows: list[dict]) -> str:
     L = [f"# Приём миров {version} — сводка ({mode}, {dt.datetime.now():%d.%m.%Y %H:%M})", "",
-         "| Модель | Итог | Точка было → стало | Δ | Медиана было → стало | Δ | Печать | Гейты: новые / ушли | CI | Флаги |",
-         "|---|---|---|---:|---|---:|---|---|---|---|"]
+         "Числа — таблицы книги (2 000 прогонов) до и после приёма.", "",
+         "| Модель | Итог | Точка было → стало | Δ | Медиана было → стало | Δ | Печать | Полоса 80 % | Гейты: новые / ушли | CI | Флаги |",
+         "|---|---|---|---:|---|---:|---|---|---|---|---|"]
     for r in rows:
-        L.append("| {m} | {s} | {p0} → {p1} | {dp} | {m0} → {m1} | {dm} | {pr0} → {pr1} | {gn} / {gg} | {ci} | {fl} |".format(
+        L.append("| {m} | {s} | {p0} → {p1} | {dp} | {m0} → {m1} | {dm} | {pr0} → {pr1} | {b0} → {b1} | {gn} / {gg} | {ci} | {fl} |".format(
             m=r["model"], s=r["status"], p0=num(r["point"][0]), p1=num(r["point"][1]), dp=fmt(r["d_point"]),
             m0=num(r["median"][0]), m1=num(r["median"][1]), dm=fmt(r["d_median"]),
-            pr0=prn(r["print"][0]), pr1=prn(r["print"][1]),
+            pr0=prn(r["print"][0]), pr1=prn(r["print"][1]), b0=(r.get("band") or ["—", "—"])[0],
+            b1=(r.get("band") or ["—", "—"])[1],
             gn=", ".join(r["gates_new"]) or "—", gg=", ".join(r["gates_gone"]) or "—", ci=r["ci"] or "—",
             fl=len(r["flags"]) or "—"))
     flagged = [r for r in rows if r["flags"]]

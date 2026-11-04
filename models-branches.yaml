@@ -1,11 +1,11 @@
-# Реестр веток перевода на команду приёма (до слияния в основные ветки моделей) — для сухого прогона пробы:
-#   python -B tools/rollout.py --version 1.7-t1 --registry models-branches.yaml
+# Реестр веток единого движка приёма (`worlds-engine`, до слияния в основные ветки моделей) — для сухого прогона пробы:
+#   python -B tools/rollout.py --version 1.7-t1 --registry models-branches.yaml [--collect]
 # Пути — от корня папки семейства (FAMILY_ROOT); venv — от каталога ветки.
 models:
-  - {id: svcb, name: Совкомбанк, kind: bank, path: Banks/Sovcombank/_wt/worlds-1.7, venv: ../../svcb-850/.venv, env: {BANK_WORKERS: 2}}
-  - {id: t, name: Т-Технологии, kind: bank, path: Banks/T-Technologies/_wt/worlds-adopt, venv: ../../t-850/.venv, env: {BANK_WORKERS: 2}}
-  - {id: sber, name: Сбербанк, kind: bank, path: Banks/Sberbank/_wt/worlds-adopt, venv: ../../sber-850/.venv, env: {BANK_WORKERS: 2}}
-  - {id: lenta, name: Лента, kind: retail, path: _wt-850/lenta-adopt, venv: ../../lenta-850/.venv, env: {LENTA_WORKERS: 2}}
-  - {id: x5, name: X5, kind: projection, path: _wt-850/x5-adopt, venv: ../../x5-850/.venv, env: {X5_WORKERS: 2}}
-  - {id: magnit, name: Магнит, kind: retail, path: _wt-850/magnit-adopt, venv: ../../magnit-850oa/.venv, env: {MAGNIT_WORKERS: 2}}
-  - {id: vtb, name: ВТБ, kind: bank, path: Banks/VTB/_wt/worlds-adopt, venv: ../../vtb-850/.venv, env: {BANK_WORKERS: 2}}
+  - {id: svcb, name: Совкомбанк, kind: bank, path: _wt-850/engine-svcb, venv: ../../Banks/Sovcombank/svcb-850/.venv, env: {BANK_WORKERS: 2}}
+  - {id: t, name: Т-Технологии, kind: bank, path: _wt-850/engine-t, venv: ../../Banks/T-Technologies/t-850/.venv, env: {BANK_WORKERS: 2}}
+  - {id: sber, name: Сбербанк, kind: bank, path: _wt-850/engine-sber, venv: ../../Banks/Sberbank/sber-850/.venv, env: {BANK_WORKERS: 2}}
+  - {id: lenta, name: Лента, kind: retail, path: _wt-850/engine-lenta, venv: ../../lenta-850/.venv, env: {LENTA_WORKERS: 2}}
+  - {id: x5, name: X5, kind: projection, path: _wt-850/engine-x5, venv: ../../x5-850/.venv, env: {X5_WORKERS: 2}}
+  - {id: magnit, name: Магнит, kind: retail, path: _wt-850/engine-magnit, venv: ../../magnit-850oa/.venv, env: {MAGNIT_WORKERS: 2}}
+  - {id: vtb, name: ВТБ, kind: bank, path: _wt-850/engine-vtb, venv: ../../Banks/VTB/vtb-850/.venv, env: {BANK_WORKERS: 2}}
