@@ -67,7 +67,8 @@
    "flags": [
     "spreads: у 10 изменённых ключей в комментарии шаблона есть числа — сверить текст: nii.books.sme_loans.spread.2026, nii.books.securities.spread.2026, nii.books.auto.spread.2029, nii.books.auto.spread.2030, nii.books.mortgage.spread.2028, nii.books.mortgage.spread.2029 …",
     "derived: у 28 изменённых ключей в комментарии шаблона есть числа — сверить текст: nii.phi_split, regimes.near_nim_shift.2027Q3, regimes.near_nim_shift.2027, regimes.near_nim_shift.2028Q1, regimes.near_nim_shift.2028Q2, regimes.near_nim_shift.2028Q3 …",
-    "tables: подпись справочного варианта window_level_in_modal_cell (маржа и C/I модальной клетки варианта) — числа прежней книги: правило без прогона сетки варианта не считается; сверить и при правке — таблицы заново"
+    "tables: подпись справочного варианта window_level_in_modal_cell (маржа и C/I модальной клетки варианта) — числа прежней книги: правило без прогона сетки варианта не считается; сверить и при правке — таблицы заново",
+    "gate-texts: гейт nim_path_joint: состав не тот, на котором писались слова шаблона (g:gates.nim_path_joint: было [\"H/soft/mid\", \"H/soft/strict\", \"N/soft/mid\", \"N/soft/strict\"], стало [\"H/soft/mid\", \"H/soft/strict\", \"N/norm/strict\", \"N/soft/mid\", \"N/soft/schedule\", \"N/soft/strict\"]) — текст собран метками, слова просмотреть ведущему"
    ],
    "seconds": null
   },
@@ -100,7 +101,8 @@
    "ci_url": null,
    "flags": [
     "spreads: у 10 изменённых ключей в комментарии шаблона есть числа — сверить текст: nii.books.mortgage.spread.2028, nii.books.mortgage.spread.2029, nii.books.mortgage.spread.2030, nii.books.securities.spread.2028, nii.books.securities.spread.2029, nii.books.securities.spread.2030 …",
-    "changes: тексты объяснений гейтов (gate_explanations.yaml), проза текста книги и решений (DECISIONS) — числа прежней книги; массы гейтов и числа меток — правилом; сверить с таблицами"
+    "gate-texts: гейт capital_gap: состав не тот, на котором писались слова шаблона (g:capital_gap.below: было [\"2031Q1\"], стало [\"2031Q1\", \"2031Q4\"]) — текст собран метками, слова просмотреть ведущему",
+    "changes: проза текста книги и решений (DECISIONS) и слова объяснений гейтов (шаблон gate_explanations.tpl) — прежней книги; числа объяснений, массы и числа меток пишет команда; сверить слова с таблицами"
    ],
    "seconds": null
   },
@@ -110,11 +112,11 @@
    "exit": null,
    "point": [
     3323.4625824067584,
-    3329.326427649816
+    3329.433153933761
    ],
    "median": [
     3173.107571987739,
-    3179.3583800210786
+    3179.3984402296164
    ],
    "print": [
     3150.0,
@@ -124,8 +126,8 @@
     "2650–3750",
     "2650–3750"
    ],
-   "d_point": 5.863845243057767,
-   "d_median": 6.250808033339581,
+   "d_point": 5.970571527002448,
+   "d_median": 6.290868241877433,
    "print_steps": 0.13,
    "gates_new": [],
    "gates_gone": [],
@@ -199,31 +201,31 @@
    "status": "ok",
    "exit": null,
    "point": [
-    53.0153099387383,
-    52.55591619988486
+    53.40098953495881,
+    52.94477927590884
    ],
    "median": [
-    50.574999999999996,
-    50.15
+    50.5,
+    50.05
    ],
    "print": [
     51.0,
     50.0
    ],
    "band": [
-    "29–77",
+    "29–76",
     "29–76"
    ],
-   "d_point": -0.4593937388534357,
-   "d_median": -0.42499999999999716,
-   "print_steps": 0.42,
+   "d_point": -0.4562102590499677,
+   "d_median": -0.45000000000000284,
+   "print_steps": 0.45,
    "gates_new": [],
    "gates_gone": [],
    "ci": null,
    "ci_url": null,
    "flags": [
     "version: у 1 изменённых ключей в комментарии шаблона есть числа — сверить текст: meta.version",
-    "changes: тесты решений tests/test_ops_rederive.py закреплены на книге 1.0 (BOOK_VERSION — «новая версия — пересмотр»): книга 1.1 требует пересмотра решений ведущим"
+    "changes: тесты решений tests/test_ops_rederive.py закреплены на книге 1.1 (BOOK_VERSION — «новая версия — пересмотр»): книга 1.2 требует пересмотра решений ведущим"
    ],
    "seconds": null
   }

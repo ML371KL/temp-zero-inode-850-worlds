@@ -83,11 +83,17 @@ def read_report(path: Path) -> dict:
     return rep
 
 
+def half_up(x: float, nd: int):
+    """Половина вверх по десятичной записи числа (327,025 → 327,03), как в журналах команды приёма."""
+    from decimal import ROUND_HALF_UP, Decimal
+    return Decimal(repr(float(x))).quantize(Decimal(1).scaleb(-nd), rounding=ROUND_HALF_UP)
+
+
 def fmt(x, nd=2):
     if x is None:
         return "—"
     if isinstance(x, (int, float)):
-        return f"{x:+.{nd}f}".replace(".", ",").replace("-", "−") if isinstance(x, float) else str(x)
+        return f"{half_up(x, nd):+.{nd}f}".replace(".", ",").replace("-", "−") if isinstance(x, float) else str(x)
     return str(x)
 
 
@@ -97,7 +103,7 @@ def prn(x):
 
 
 def num(x, nd=2):
-    return "—" if x is None else f"{x:.{nd}f}".replace(".", ",")
+    return "—" if x is None else f"{half_up(x, nd):.{nd}f}".replace(".", ",")
 
 
 def band(n: dict):
